@@ -1,4 +1,10 @@
-const query = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <h1>To which single-gene defect can be heart diseases in newborns linked to?</h1>
+  </head>
+<script>
+  const query = `
 SELECT ?defect ?defectLabel ?gene ?geneLabel
 WHERE
 {
@@ -14,4 +20,7 @@ WHERE
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
 }
 LIMIT 50
-`; 
+`;
+</script>
+</body>
+</html>
