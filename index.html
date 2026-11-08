@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <h1>To which single-gene defect can be heart diseases in newborns linked to?</h1>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script> <!--loading the d3.js library, link found on their website-->
+	<style>
+		body {background-color: LavenderBlush}
+    #chart { 
+      border: 1px solid purple;
+      text-align: center;
+      padding: 20px; /*generating space around content*/
+    }
+	</style>
   </head>
+<body>
+
+	<h1>Which single-gene defects can heart diseases in newborns be linked to?</h1>
+<p>According to National Library of Medicine, congenital heart diseases (CHD) are one of the most common birth defects and remain a leading cause of deaths in childhood. Specific genetic causes can be detected in 40% of cases of CHD, from which 12% make up single gene disorders.</p>
+<div id="chart">
+
+</div>
+
 <script>
   const query = `
 SELECT ?defect ?defectLabel ?gene ?geneLabel
@@ -16,11 +32,21 @@ WHERE
  wd:Q838139 #ventricular septal defect
  wd:Q2072063 #patent ductus arteriosus
 }
-?defect wdt:P2293 ?gene .#genetic association
+?defect wdt:P2293 ?gene #genetic association
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
 }
 LIMIT 50
 `;
+const url = "https://query.wikidata.org/sparql?query=" + encodeURIComponent(query) + "&format=json";
+fetch(url, {
+headers: {
+Accept: "application/sparql-results+json", //making sure the results are in JSON
+}
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => {console.error("Error:", error); 
+});
 </script>
 </body>
 </html>
