@@ -3,9 +3,8 @@
 <head>
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script> <!--loading the d3.js library, link found on their website-->
 	<style>
-		body {background-color: LavenderBlush}
+		body {background-color: LavenderBlush; font-family: sans-serif; }
     #chart { 
-      border: 1px solid purple;
       text-align: center;
       padding: 20px; /*generating space around content*/
     }
@@ -16,7 +15,7 @@
 	<h1>Which single-gene defects can heart diseases in newborns be linked to?</h1>
 <p>According to National Library of Medicine, congenital heart diseases (CHD) are one of the most common birth defects and remain a leading cause of deaths in childhood. Specific genetic causes can be detected in 40% of cases of CHD, from which 12% make up single gene disorders.</p>
 <div id="chart">
-
+  <svg width="1000" height="600"></svg>
 </div>
 
 <script>
@@ -32,7 +31,7 @@ WHERE
  wd:Q838139 #ventricular septal defect
  wd:Q2072063 #patent ductus arteriosus
 }
-?defect wdt:P2293 ?gene #genetic association
+?defect wdt:P2293 ?gene . #genetic association
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
 }
 LIMIT 50
@@ -44,7 +43,72 @@ Accept: "application/sparql-results+json", //making sure the results are in JSON
 }
 })
 .then(response => response.json())
-.then(data => console.log(data))
+.then(data => {
+  const bindings = data.results.bindings;
+  const aggregatedData = d3.rollups( 
+    bindings, 
+    v => v.length, //counts how many items belong to each disease 
+    d => d.defectLabel.value 
+  ).map(([defect, count]) => ({defect, count}));
+  console.log(aggregatedData);
+  //set up of the chart in terms of size
+  const marginTop = 40;
+  const marginRight = 40;
+  const marginBottom = 60;
+  const marginLeft = 220;
+  const width = 1000 - marginLeft - marginRight;
+  const height = 600 - marginTop - marginBottom;
+  const svg = d3.select("svg");
+  const chart = svg.append("g")
+    .attr("transform", `translate(${marginLeft}, ${marginTop})`); //defining chart on my blank canvas, moving chart to (60;60) position 
+
+  const yScale = d3.scaleBand() //for categories with names 
+    .domain(aggregatedData.map(d => d.defect))
+    .range([0, height])
+    .padding(0.2);
+  
+  const xScale = d3.scaleLinear() //for numbers 
+    .domain([0, d3.max(aggregatedData, d => d.count)])
+    .range([0, width]);
+
+  chart.selectAll("rect")
+    .data(aggregatedData)
+    .enter()
+    .append("rect")
+    .attr("x", 0) //so the bar starts form zero and goes right as it is a horizonta graph 
+    .attr("y", d => yScale(d.defect)) //vertical position 
+    .attr("width", d => xScale(d.count)) //how long the bar is 
+    .attr("height", yScale.bandwidth()) //height of the rectangles 
+    .attr("fill", "purple")
+    
+    .on("mouseenter", function(event, d) { //everytime the mouse goes over the bar the opacity drops to 0.5
+      d3.select(this).attr("opacity", 0.5);
+    })
+    .on("mouseleave", function(event, d){ //when the mouse leaves the bar it will return to 1
+      d3.select(this).attr("opacity", 1);
+    });
+
+  chart.append("g")
+    .call(d3.axisLeft(yScale)); //names of diseases appear on the left 
+  
+  chart.append("g")
+    .attr("transform", `translate(0, ${height})`) //transofrm moves the (0,0) position on the bottom so it is underneath the bars
+    .call(d3.axisBottom(xScale)); //numbers on the bottom part 
+  
+    //naming both axis: 
+  chart.append("text")
+   .attr("x", width / 2) //middle of the chart
+   .attr("y", height + marginBottom - 5) //below the axis number 
+   .attr("text-anchor", "middle") //centered as well 
+   .text("Number of associated genes");
+
+  chart.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -height / 2) //centered with axis
+    .attr("y", -marginLeft + 30) //on the left of the y-axis
+    .attr("text-anchor", "middle")
+    .text("Congenital heart defects");
+})
 .catch(error => {console.error("Error:", error); 
 });
 </script>
