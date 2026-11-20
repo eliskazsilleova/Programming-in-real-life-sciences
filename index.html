@@ -21,19 +21,11 @@
 <script>
   const query = `
 SELECT ?defect ?defectLabel ?gene ?geneLabel
-WHERE
-{
-  VALUES ?defect
-{
- wd:Q860167 #bicuspid aortic valve
- wd:Q1126831 #tetralogy of fallot
- wd:Q390211 #Atrioventricular Septal Defect
- wd:Q838139 #ventricular septal defect
- wd:Q2072063 #patent ductus arteriosus
-}
-?defect wdt:P2293 ?gene . #genetic association
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
-}
+WHERE {
+  ?defect wdt:P279* wd:Q939364.
+  ?defect wdt:P2293 ?gene.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en".}
+  }
 LIMIT 50
 `;
 const url = "https://query.wikidata.org/sparql?query=" + encodeURIComponent(query) + "&format=json";
