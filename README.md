@@ -1,4 +1,4 @@
-# Which single-gene defects can heart diseases in newborns be linked to? 
+# How many individual genes can be linked to distinct congenital heart diseases? 
 
 ## Table of Contents
 - [Description](#description)
