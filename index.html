@@ -24,9 +24,10 @@ SELECT ?defect ?defectLabel ?gene ?geneLabel
 WHERE {
   ?defect wdt:P279* wd:Q939364.
   ?defect wdt:P2293 ?gene.
+  FILTER (?defect != wd:Q939364)
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en".}
   }
-LIMIT 200
+LIMIT 100
 `;
 const url = "https://query.wikidata.org/sparql?query=" + encodeURIComponent(query) + "&format=json";
 fetch(url, {
@@ -47,7 +48,7 @@ Accept: "application/sparql-results+json", //making sure the results are in JSON
   const marginTop = 40;
   const marginRight = 40;
   const marginBottom = 60;
-  const marginLeft = 260;
+  const marginLeft = 400;
   const width = 1000 - marginLeft - marginRight;
   const height = 600 - marginTop - marginBottom;
   const svg = d3.select("svg");
