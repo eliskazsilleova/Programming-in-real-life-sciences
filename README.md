@@ -23,8 +23,13 @@ It was built with the intention to educate and show connections in cardiology.
 3. Open the downloaded index.html file through preferred web browser. 
 
 ## Usage
-- 
+- Open "index.html" in your browser to display the results. 
 
+## Data Interpretation 
+After the bar chart is displayed, over 30 congenital heart diseases are visible, linked to a number of associated genes. Majority of diseases are linked only to one individual gene. Two diseases, Williams-Beuren syndrome and Tetralogy of Fallot, are linked to most genes, 18 and 15, respectfully.
+In the SPARQL, the "congential heart disease" term was filtered from the data, as the research was centered around the individual congenital heart diseases. That is why sub-group was also used in the SPARQL template.
+In the terms of limitations, the query was set to limit 100, as higher number could potentially make the graph less clear and possible not so easy to read. 
+This graph functions as an easy acces tool for quick representation, connecting number of genes to congenital heart diseases. 
 
 ## Contact
 To report bugs, provide feedback or ask any questions, contact me through an university email e.zsilleova@student.maastrichtuniversity.nl
