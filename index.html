@@ -26,7 +26,7 @@ WHERE {
   ?defect wdt:P2293 ?gene.
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en".}
   }
-LIMIT 50
+LIMIT 200
 `;
 const url = "https://query.wikidata.org/sparql?query=" + encodeURIComponent(query) + "&format=json";
 fetch(url, {
