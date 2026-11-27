@@ -3,8 +3,7 @@
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Installation and Usage](#installation-and-Usage)
 - [Data Interpretation](#data-interpretation)
 - [Contact](#contact)
 
@@ -17,11 +16,8 @@ It was built with the intention to educate and show connections in cardiology.
 - **D3.js**: Turning data into visual bar chart through d3.rollups() 
 - **Interactive opacity**: Ensuring that opacity changes when mouse enters/leaves the area of a bar with fucntions "mouseenter" and "mouseleave"
 
-## Installation
+## Installation and Usage
 The website can be easily opened through the url found in the repository, in the section "About". Therefore, no installation is needed.
-
-## Usage
-- Open "index.html" in your browser to display the results. 
 
 ## Data Interpretation 
 After the bar chart is displayed, several congenital heart diseases are visible, linked to a number of associated genes. In the usual scenario, majority of diseases are linked to only one gene. What is important to remember, is that the SPARQL query takes data from live data base that can change constantly. 
