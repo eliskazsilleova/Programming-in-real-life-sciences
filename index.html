@@ -37,11 +37,11 @@ Accept: "application/sparql-results+json", //making sure the results are in JSON
 })
 .then(response => response.json())
 .then(data => {
-  const bindings = data.results.bindings;
+  const bindings = data.results.bindings; //results are bound by wikidata
   const aggregatedData = d3.rollups( 
     bindings, 
     v => v.length, //counts how many items belong to each disease 
-    d => d.defectLabel.value 
+    d => d.defectLabel.value //puts reccurring diseases together 
   ).map(([defect, count]) => ({defect, count}));
   console.log(aggregatedData);
   //set up of the chart in terms of size
@@ -53,7 +53,7 @@ Accept: "application/sparql-results+json", //making sure the results are in JSON
   const height = 600 - marginTop - marginBottom;
   const svg = d3.select("svg");
   const chart = svg.append("g")
-    .attr("transform", `translate(${marginLeft}, ${marginTop})`); //defining chart on my blank canvas, moving chart to (60;60) position 
+    .attr("transform", `translate(${marginLeft}, ${marginTop})`); //defining chart on my blank canvas, moving chart to (400;40) position 
 
   const yScale = d3.scaleBand() //for categories with names 
     .domain(aggregatedData.map(d => d.defect))
