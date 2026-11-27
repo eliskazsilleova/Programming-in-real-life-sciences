@@ -18,15 +18,13 @@ It was built with the intention to educate and show connections in cardiology.
 - **Interactive opacity**: Ensuring that opacity changes when mouse enters/leaves the area of a bar with fucntions "mouseenter" and "mouseleave"
 
 ## Installation
-1. Click on the index.html file in the repository. 
-2. Download the raw file.
-3. Open the downloaded index.html file through preferred web browser. 
+The website can be easily opened through the url found in the repository, in the section "About". Therefore, no installation is needed.
 
 ## Usage
 - Open "index.html" in your browser to display the results. 
 
 ## Data Interpretation 
-After the bar chart is displayed, over 30 congenital heart diseases are visible, linked to a number of associated genes. Majority of diseases are linked only to one individual gene. Two diseases, Williams-Beuren syndrome and Tetralogy of Fallot, are linked to most genes, 18 and 15, respectively.
+After the bar chart is displayed, several congenital heart diseases are visible, linked to a number of associated genes. In the usual scenario, majority of diseases are linked to only one gene. What is important to remember, is that the SPARQL query takes data from live data base that can change constantly. 
 In the SPARQL, the "congenital heart disease" term was filtered from the data, as the research was centered around the individual heart diseases found in newborns. That is why subclass was also used in the SPARQL template.
 In the terms of limitations, the query was set to limit 100, as higher number could potentially make the graph less clear and possible not so easy to read. 
 This graph functions as an easily accesible tool for quick representation, connecting number of genes to congenital heart diseases. 
