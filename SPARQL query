@@ -1,6 +1,6 @@
 SELECT ?defect ?defectLabel ?gene ?geneLabel
 WHERE {
-  ?defect wdt:P279* wd:Q939364.
+  ?defect wdt:P279 wd:Q939364.
   ?defect wdt:P2293 ?gene.
   FILTER (?defect != wd:Q939364)
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en".}
