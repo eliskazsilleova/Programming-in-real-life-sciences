@@ -8,7 +8,7 @@
 - [Contact](#contact)
 
 ## Description
-In this project, dataset from Wikidata, based on the specific SPARQL input, was used. It contains five common congential heart diseases linked to single-gene defect.  
+In this project, dataset from Wikidata, based on the specific SPARQL input, was used. It contains congential heart diseases that are linked to number of gene defects.  
 It was built with the intention to educate and show connections in cardiology. 
 
 ## Features
@@ -20,9 +20,8 @@ It was built with the intention to educate and show connections in cardiology.
 The website can be easily opened through the url found in the repository, in the section "About". Therefore, no installation is needed.
 
 ## Data Interpretation 
-After the bar chart is displayed, several congenital heart diseases are visible, linked to a number of associated genes. In the usual scenario, majority of diseases are linked to only one gene. What is important to remember, is that the SPARQL query takes data from live data base that can change constantly. 
-In the SPARQL, the "congenital heart disease" term was filtered from the data, as the research was centered around the individual heart diseases found in newborns. That is why subclass was also used in the SPARQL template.
-In the terms of limitations, the query was set to limit 100, as higher number could potentially make the graph less clear and possible not so easy to read. 
+After the bar chart is displayed, several congenital heart diseases are visible, linked to a number of associated genes. In the usual scenario, majority of diseases are linked to only one gene. What is important to remember, is that the SPARQL query takes data from live data base that can change constantly and therefore no primary interpretation is possible. It is more of an easily accessible tool for quick representation, connecting number of genes to congenital heart diseases. 
+In the SPARQL, the "congenital heart disease" term was filtered from the data, as the research was centered around the individual heart diseases found in newborns. That is why subclass was rather used in the SPARQL template, and not the deeper subclass which would be indicated by *. The reason is, that deeper subclass was showing unnecessary connections and polluted the graph. The project aimed to show the data straightforwardly.  
 This graph functions as an easily accesible tool for quick representation, connecting number of genes to congenital heart diseases. 
 
 ## Contact
